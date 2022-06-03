@@ -1,0 +1,8 @@
+#! /usr/bin/bash
+
+rm -rf build/libs/*
+./gradlew build
+cd build || exit
+unzip -d libs/fredo-2.0.0-all.jar libs/fredo-2.0.0.jar
+cp -R deps/* libs/fredo-2.0.0-all.jar/
+cp -R libs/fredo-2.0.0-all.jar ~/.minecraft/mods/
