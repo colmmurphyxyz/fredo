@@ -5,6 +5,8 @@ import club.minnced.discord.webhook.send.WebhookMessageBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.interactions.commands.Command;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
@@ -55,7 +57,12 @@ public class DiscordClient {
 
         // initialise all slash commands
         for (FredoCommand command : FredoCommand.values()) {
-            jda.upsertCommand(command.name, command.description).queue();
+            jda.upsertCommand(command.name, command.description).queue( (cmd) -> {
+                for (Object[] option : command.options) {
+                    cmd.editCommand().addOption((OptionType) option[0], (String) option[1], (String) option[2], (boolean) option[3])
+                            .queue();
+                }
+            });
         }
         LOGGER.info(String.format("Successfully logged into discord as %s#%s",
                 jda.getSelfUser().getName(), jda.getSelfUser().getDiscriminator()));

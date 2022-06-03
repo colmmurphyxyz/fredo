@@ -25,6 +25,10 @@ public class DeathCounter {
         return value;
     }
 
+    public int getOrZero(String key) {
+        return this.getOrDefault(key, 0);
+    }
+
     public int getOrError(String key, String errorMessage) {
         Integer value = this.get(key);
         if (value == null) {
