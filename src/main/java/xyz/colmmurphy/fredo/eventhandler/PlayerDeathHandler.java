@@ -11,8 +11,7 @@ public class PlayerDeathHandler extends FredoEventHandler {
         if (!(event.getEntity() instanceof Player)) return;
         String deathMessage = event.getSource().getLocalizedDeathMessage(event.getEntityLiving()).getString();
         String playerName = event.getEntityLiving().getName().getString();
-        int playerDeaths = Fredo.deathCounter.getOrDefault(playerName, 0);
-        Fredo.deathCounter.put(playerName, playerDeaths + 1);
+        Fredo.deathCounter.addDeath(playerName);
         discordClient.sendDeathMessage(deathMessage);
     }
 }

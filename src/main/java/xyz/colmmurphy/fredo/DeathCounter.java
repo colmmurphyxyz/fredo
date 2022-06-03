@@ -25,8 +25,21 @@ public class DeathCounter {
         return value;
     }
 
+    public int getOrError(String key, String errorMessage) {
+        Integer value = this.get(key);
+        if (value == null) {
+            throw new NullPointerException(errorMessage);
+        }
+        return value;
+    }
+
     public void put(String key, int value) {
         this.deathCount.put(key, value);
+    }
+
+    public void addDeath(String playerName) {
+        int currentDeaths = this.getOrDefault(playerName, 0);
+        this.put(playerName, currentDeaths + 1);
     }
 
     public DeathCounter() {

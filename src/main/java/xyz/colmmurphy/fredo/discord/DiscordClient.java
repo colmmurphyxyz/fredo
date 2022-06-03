@@ -35,7 +35,7 @@ public class DiscordClient {
 
     private static DiscordClient INSTANCE;
     private DiscordClient() {
-        String token = System.getenv("TOKEN");
+        String token = System.getenv("BOT_TOKEN");
         try {
             this.jda = JDABuilder.createLight(token,
                             GatewayIntent.GUILD_MESSAGES,

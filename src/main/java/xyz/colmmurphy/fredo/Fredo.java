@@ -89,7 +89,7 @@ public class Fredo {
 
     @SubscribeEvent
     public void onServerClosing(ServerStoppingEvent event) {
-        this.deathCounter.writeDeathCountToFile();
+        deathCounter.writeDeathCountToFile();
     }
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
