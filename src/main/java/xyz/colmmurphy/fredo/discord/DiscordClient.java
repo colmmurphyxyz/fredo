@@ -66,6 +66,7 @@ public class DiscordClient {
         }
         LOGGER.info(String.format("Successfully logged into discord as %s#%s",
                 jda.getSelfUser().getName(), jda.getSelfUser().getDiscriminator()));
+        LOGGER.warn("You are about to see 2 big walls of red text, do not be alarmed");
 
         // connect to guild/channel
         this.guild = this.jda.getGuildById(guildID);

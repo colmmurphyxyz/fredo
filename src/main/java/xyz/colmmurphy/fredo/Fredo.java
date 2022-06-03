@@ -90,6 +90,7 @@ public class Fredo {
     @SubscribeEvent
     public void onServerClosing(ServerStoppingEvent event) {
         deathCounter.writeDeathCountToFile();
+        discordClient.sendWebhookAnnouncement(":red_circle: Server is offline :red_circle:");
     }
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD

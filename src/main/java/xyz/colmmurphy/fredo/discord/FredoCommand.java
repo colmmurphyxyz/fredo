@@ -15,14 +15,17 @@ enum FredoCommand {
     ONLINE("online", "view all online players", new Object[][]{}, (event) -> {
         String[] playerNames = (String[]) Fredo.onlinePlayers.stream().map(Player::getName).toArray();
         String online = Arrays.stream(playerNames).reduce("", (prev, s) -> prev + "\n" + s);
+        if (playerNames.length == 0) {
+            online = "There is nobody online :(";
+        }
         event.reply(online)
                 .setEphemeral(false)
                 .queue();
         return;
     }),
 
-    DEATHS("deaths", "see how many times a player has dies", new Object[][] {{OptionType.STRING, "playerName", "player's username", true}}, (event) -> {
-        String playerName = event.getOption("playerName").getAsString();
+    DEATHS("deaths", "see how many times a player has dies", new Object[][] {{OptionType.STRING, "playername", "player's username", true}}, (event) -> {
+        String playerName = event.getOption("playername").getAsString();
         int deaths = Fredo.deathCounter.getOrZero(playerName);
         event.reply(playerName + " has died " + String.valueOf(deaths) + " times")
                 .setEphemeral(true)
